@@ -1,10 +1,10 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { Content } from "./components/Content";
 import Link from "next/link";
-import { Header } from "./components/Header";
 import useSWR from "swr";
-import { fetcher } from "./fetch/fetcher";
+import Header from "./components/Header";
+import Content from "./components/Content";
+import fetcher from "./fetch/fetcher";
 
 export default function Home() {
   const { data, error } = useSWR("/api/hello", fetcher);
