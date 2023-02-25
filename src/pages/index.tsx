@@ -4,12 +4,15 @@ import Link from "next/link";
 import useSWR from "swr";
 import Header from "./components/Header";
 import Content from "./components/Content";
-import fetcher from "./fetch/fetcher";
+import { DataType } from "./api/message";
 
 export default function Home() {
-  const { data, error } = useSWR("/api/hello", fetcher);
+  async function fetcher(url: string): Promise<DataType> {
+    const response = await fetch(url);
+    return response.json();
+  }
+  const { data, error } = useSWR("/api/message", fetcher);
   if (error) return <div>failed to load</div>;
-  console.log(data);
   if (!data) return <div>loading...</div>;
   return (
     <>
